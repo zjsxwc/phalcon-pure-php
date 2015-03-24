@@ -20,8 +20,6 @@ namespace Phalcon {
 
 		const VERSION_SPECIAL_NUMBER = 4;
 
-		public $a;
-
 		/**
 		 * Area where the version number is set. The format is as follows:
 		 * ABBCCDE

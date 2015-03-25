@@ -5,6 +5,9 @@ namespace Phalcon
     class Image
     {
 
+        /*
+	     * Resizing constraints
+	     */
         const NONE = 1;
 
         const WIDTH = 2;
@@ -18,7 +21,8 @@ namespace Phalcon
         const PRECISE = 6;
 
         const TENSILE = 7;
-
+        
+        // Flipping directions
         const HORIZONTAL = 11;
 
         const VERTICAL = 12;

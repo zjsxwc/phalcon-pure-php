@@ -61,7 +61,9 @@ namespace Phalcon
          * Registry constructor
          */
         final public function __construct()
-        {}
+        {
+            $this->_data = array();
+        }
 
         /**
          * Checks if the element is present in the registry
@@ -70,7 +72,9 @@ namespace Phalcon
          *            string offset
          */
         final public function offsetExists($offset)
-        {}
+        {
+            return isset($this->_data[$offset]);
+        }
 
         /**
          * Returns an index in the registry
@@ -79,7 +83,9 @@ namespace Phalcon
          *            string offset
          */
         final public function offsetGet($offset)
-        {}
+        {
+            return $this->_data[$offset];
+        }
 
         /**
          * Sets an element in the registry
@@ -90,7 +96,9 @@ namespace Phalcon
          *            mixed value
          */
         final public function offsetSet($offset, $value)
-        {}
+        {
+            return $this->_data[$offset] = $value;
+        }
 
         /**
          * Unsets an element in the registry
@@ -99,7 +107,9 @@ namespace Phalcon
          *            string offset
          */
         final public function offsetUnset($offset)
-        {}
+        {
+            unset($this->_data[$offset]);
+        }
 
         /**
          * Sets an element in the registry
@@ -110,7 +120,9 @@ namespace Phalcon
          *            mixed value
          */
         final public function __set($offset, $value)
-        {}
+        {
+            return $this->_data[$offset] = $value;
+        }
 
         /**
          * Returns an index in the registry
@@ -119,7 +131,9 @@ namespace Phalcon
          *            string offset
          */
         final public function __get($offset)
-        {}
+        {
+            return $this->_data[$offset];
+        }
 
         /**
          * Checks how many elements are in the register
@@ -127,13 +141,17 @@ namespace Phalcon
          * @return int
          */
         final public function count()
-        {}
+        {
+            return count($this->_data);
+        }
 
         /**
          * Moves cursor to next row in the registry
          */
         final public function next()
-        {}
+        {
+            next($this->_data);
+        }
 
         /**
          * Gets pointer number of active row in the registry
@@ -141,18 +159,26 @@ namespace Phalcon
          * @return int
          */
         final public function key()
-        {}
+        {
+            return key($this->_data);
+        }
 
         /**
          * Rewinds the registry cursor to its beginning
          */
         final public function rewind()
-        {}
+        {
+            reset($this->_data);
+        }
 
         public function valid()
-        {}
+        {
+            return key($this->_data) !== null;
+        }
 
         public function current()
-        {}
+        {
+            return current($this->_data);
+        }
     }
 }

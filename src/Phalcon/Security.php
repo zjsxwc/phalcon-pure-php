@@ -22,6 +22,9 @@ namespace Phalcon
     class Security implements \Phalcon\Di\InjectionAwareInterface
     {
 
+        /**
+         * @var \Phalcon\DiInterface
+         */
         protected $_dependencyInjector;
 
         protected $_workFactor;

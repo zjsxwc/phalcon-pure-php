@@ -22,6 +22,12 @@ namespace Phalcon
     class Security implements \Phalcon\Di\InjectionAwareInterface
     {
 
+        const CSRF_KEY = '$PHALCON/CSRF/KEY$';
+
+        const CSRF_TOKEN = '$PHALCON/CSRF$';
+
+        const HASH_PREFIX = '$2a$';
+
         /**
          *
          * @var \Phalcon\DiInterface
@@ -134,7 +140,7 @@ namespace Phalcon
                 $workFactor = $this->_workFactor;
             }
             
-            return crypt($password, '$2a$' . sprintf('%02s', $workFactor . $this->getSaltBytes()));
+            return crypt($password, self::HASH_PREFIX . sprintf('%02s', $workFactor . $this->getSaltBytes()));
         }
 
         /**
@@ -181,7 +187,7 @@ namespace Phalcon
          */
         public function isLegacyHash($password, $passwordHash)
         {
-            return starts_with($passwordHash, '$2a$');
+            return starts_with($passwordHash, self::HASH_PREFIX);
         }
 
         /**
@@ -198,7 +204,7 @@ namespace Phalcon
             }
             
             $safeBytes = filter_alphanum(base64_encode(openssl_random_pseudo_bytes($numberBytes)));
-            $this->_dependencyInjector->getShared('session')->set('$PHALCON/CSRF/KEY$', $safeBytes);
+            $this->_dependencyInjector->getShared('session')->set(self::CSRF_KEY, $safeBytes);
             return $safeBytes;
         }
 
@@ -217,7 +223,7 @@ namespace Phalcon
             
             $token = filter_alphanum(base64_encode(openssl_random_pseudo_bytes($numberBytes)));
             
-            $this->_dependencyInjector->getShared('session')->set('$PHALCON/CSRF$', $token);
+            $this->_dependencyInjector->getShared('session')->set(self::CSRF_TOKEN, $token);
             
             return $token;
         }
@@ -236,7 +242,7 @@ namespace Phalcon
             $session = $this->_dependencyInjector->getShared('session');
             
             if (! $tokenKey) {
-                $tokenKey = $session->get('$PHALCON/CSRF/KEY$');
+                $tokenKey = $session->get(self::CSRF_KEY);
             }
             
             if (! $tokenValue) {
@@ -253,7 +259,7 @@ namespace Phalcon
             /**
              * The value is the same?
              */
-            return $token == $session->get('$PHALCON/CSRF$');
+            return $token == $session->get(self::CSRF_TOKEN);
         }
 
         /**
@@ -263,7 +269,7 @@ namespace Phalcon
          */
         public function getSessionToken()
         {
-            return $this->_dependencyInjector->getShared('session')->get('$PHALCON/CSRF$');
+            return $this->_dependencyInjector->getShared('session')->get(self::CSRF_TOKEN);
         }
 
         /**

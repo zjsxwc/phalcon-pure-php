@@ -103,7 +103,7 @@ namespace Phalcon\Debug
 		 * @param string name
 		 * @return string
 		 */
-		public function var($variable, $name=null){ }
+		public function _var($variable, $name=null){ }
 
 
 		/**

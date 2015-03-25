@@ -6,5 +6,6 @@ namespace Phalcon
 
 		const ALLOW = 1;
 
-		const DENY =
+		const DENY = 0;
+    }
 }

@@ -1,31 +1,24 @@
-<?php 
+<?php
+namespace Phalcon\Http\Response
+{
 
-namespace Phalcon\Http\Response {
+    interface CookiesInterface
+    {
 
-	interface CookiesInterface {
+        public function useEncryption($useEncryption);
 
-		public function useEncryption($useEncryption);
+        public function isUsingEncryption();
 
+        public function set($name, $value = null, $expire = null, $path = null, $secure = null, $domain = null, $httpOnly = null);
 
-		public function isUsingEncryption();
+        public function get($name);
 
+        public function has($name);
 
-		public function set($name, $value=null, $expire=null, $path=null, $secure=null, $domain=null, $httpOnly=null);
+        public function delete($name);
 
+        public function send();
 
-		public function get($name);
-
-
-		public function has($name);
-
-
-		public function delete($name);
-
-
-		public function send();
-
-
-		public function reset();
-
-	}
+        public function reset();
+    }
 }

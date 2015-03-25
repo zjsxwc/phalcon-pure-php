@@ -1,121 +1,84 @@
-<?php 
+<?php
+namespace Phalcon\Http
+{
 
-namespace Phalcon\Http {
+    interface RequestInterface
+    {
 
-	interface RequestInterface {
+        public function get($name = null, $filters = null, $defaultValue = null);
 
-		public function get($name=null, $filters=null, $defaultValue=null);
+        public function getPost($name = null, $filters = null, $defaultValue = null);
 
+        public function getQuery($name = null, $filters = null, $defaultValue = null);
 
-		public function getPost($name=null, $filters=null, $defaultValue=null);
+        public function getServer($name);
 
+        public function has($name);
 
-		public function getQuery($name=null, $filters=null, $defaultValue=null);
+        public function hasPost($name);
 
+        public function hasQuery($name);
 
-		public function getServer($name);
+        public function hasServer($name);
 
+        public function getHeader($header);
 
-		public function has($name);
+        public function getScheme();
 
+        public function isAjax();
 
-		public function hasPost($name);
+        public function isSoapRequested();
 
+        public function isSecureRequest();
 
-		public function hasQuery($name);
+        public function getRawBody();
 
+        public function getServerAddress();
 
-		public function hasServer($name);
+        public function getServerName();
 
+        public function getHttpHost();
 
-		public function getHeader($header);
+        public function getClientAddress($trustForwardedHeader = null);
 
+        public function getMethod();
 
-		public function getScheme();
+        public function getUserAgent();
 
+        public function isMethod($methods);
 
-		public function isAjax();
+        public function isPost();
 
+        public function isGet();
 
-		public function isSoapRequested();
+        public function isPut();
 
+        public function isHead();
 
-		public function isSecureRequest();
+        public function isDelete();
 
+        public function isOptions();
 
-		public function getRawBody();
+        public function hasFiles($notErrored = null);
 
+        public function getUploadedFiles($notErrored = null);
 
-		public function getServerAddress();
+        public function getHTTPReferer();
 
+        public function getAcceptableContent();
 
-		public function getServerName();
+        public function getBestAccept();
 
+        public function getClientCharsets();
 
-		public function getHttpHost();
+        public function getBestCharset();
 
+        public function getLanguages();
 
-		public function getClientAddress($trustForwardedHeader=null);
+        public function getBestLanguage();
 
+        public function getBasicAuth();
 
-		public function getMethod();
-
-
-		public function getUserAgent();
-
-
-		public function isMethod($methods);
-
-
-		public function isPost();
-
-
-		public function isGet();
-
-
-		public function isPut();
-
-
-		public function isHead();
-
-
-		public function isDelete();
-
-
-		public function isOptions();
-
-
-		public function hasFiles($notErrored=null);
-
-
-		public function getUploadedFiles($notErrored=null);
-
-
-		public function getHTTPReferer();
-
-
-		public function getAcceptableContent();
-
-
-		public function getBestAccept();
-
-
-		public function getClientCharsets();
-
-
-		public function getBestCharset();
-
-
-		public function getLanguages();
-
-
-		public function getBestLanguage();
-
-
-		public function getBasicAuth();
-
-
-		public function getDigestAuth();
-
-	}
+        public function getDigestAuth();
+    }
 }

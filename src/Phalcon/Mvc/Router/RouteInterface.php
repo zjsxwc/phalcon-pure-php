@@ -1,49 +1,36 @@
-<?php 
+<?php
+namespace Phalcon\Mvc\Router
+{
 
-namespace Phalcon\Mvc\Router {
+    interface RouteInterface
+    {
 
-	interface RouteInterface {
+        public function __construct($pattern, $paths = null, $httpMethods = null);
 
-		public function __construct($pattern, $paths=null, $httpMethods=null);
+        public function compilePattern($pattern);
 
+        public function via($httpMethods);
 
-		public function compilePattern($pattern);
+        public function reConfigure($pattern, $paths = null);
 
+        public function getName();
 
-		public function via($httpMethods);
+        public function setName($name);
 
+        public function setHttpMethods($httpMethods);
 
-		public function reConfigure($pattern, $paths=null);
+        public function getRouteId();
 
+        public function getPattern();
 
-		public function getName();
+        public function getCompiledPattern();
 
+        public function getPaths();
 
-		public function setName($name);
+        public function getReversedPaths();
 
+        public function getHttpMethods();
 
-		public function setHttpMethods($httpMethods);
-
-
-		public function getRouteId();
-
-
-		public function getPattern();
-
-
-		public function getCompiledPattern();
-
-
-		public function getPaths();
-
-
-		public function getReversedPaths();
-
-
-		public function getHttpMethods();
-
-
-		public static function reset();
-
-	}
+        public static function reset();
+    }
 }

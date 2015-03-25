@@ -1,49 +1,36 @@
-<?php 
+<?php
+namespace Phalcon\Mvc\Model
+{
 
-namespace Phalcon\Mvc\Model {
+    interface RelationInterface
+    {
 
-	interface RelationInterface {
+        public function __construct($type, $referencedModel, $fields, $referencedFields, $options = null);
 
-		public function __construct($type, $referencedModel, $fields, $referencedFields, $options=null);
+        public function setIntermediateRelation($intermediateFields, $intermediateModel, $intermediateReferencedFields);
 
+        public function isReusable();
 
-		public function setIntermediateRelation($intermediateFields, $intermediateModel, $intermediateReferencedFields);
+        public function getType();
 
+        public function getReferencedModel();
 
-		public function isReusable();
+        public function getFields();
 
+        public function getReferencedFields();
 
-		public function getType();
+        public function getOptions();
 
+        public function isForeignKey();
 
-		public function getReferencedModel();
+        public function getForeignKey();
 
+        public function isThrough();
 
-		public function getFields();
+        public function getIntermediateFields();
 
+        public function getIntermediateModel();
 
-		public function getReferencedFields();
-
-
-		public function getOptions();
-
-
-		public function isForeignKey();
-
-
-		public function getForeignKey();
-
-
-		public function isThrough();
-
-
-		public function getIntermediateFields();
-
-
-		public function getIntermediateModel();
-
-
-		public function getIntermediateReferencedFields();
-
-	}
+        public function getIntermediateReferencedFields();
+    }
 }

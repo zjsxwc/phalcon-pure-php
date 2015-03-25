@@ -1,7 +1,8 @@
-<?php 
+<?php
+namespace Phalcon\Cli\Router
+{
 
-namespace Phalcon\Cli\Router {
-
-	class Exception extends \Phalcon\Exception {
-	}
+    class Exception extends \Phalcon\Exception
+    {
+    }
 }

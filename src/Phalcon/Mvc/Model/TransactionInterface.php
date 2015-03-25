@@ -1,43 +1,32 @@
-<?php 
+<?php
+namespace Phalcon\Mvc\Model
+{
 
-namespace Phalcon\Mvc\Model {
+    interface TransactionInterface
+    {
 
-	interface TransactionInterface {
+        public function __construct(\Phalcon\DiInterface $dependencyInjector, $autoBegin = null, $service = null);
 
-		public function __construct(\Phalcon\DiInterface $dependencyInjector, $autoBegin=null, $service=null);
+        public function setTransactionManager(\Phalcon\Mvc\Model\Transaction\ManagerInterface $manager);
 
+        public function begin();
 
-		public function setTransactionManager(\Phalcon\Mvc\Model\Transaction\ManagerInterface $manager);
+        public function commit();
 
+        public function rollback($rollbackMessage = null, $rollbackRecord = null);
 
-		public function begin();
+        public function getConnection();
 
+        public function setIsNewTransaction($isNew);
 
-		public function commit();
+        public function setRollbackOnAbort($rollbackOnAbort);
 
+        public function isManaged();
 
-		public function rollback($rollbackMessage=null, $rollbackRecord=null);
+        public function getMessages();
 
+        public function isValid();
 
-		public function getConnection();
-
-
-		public function setIsNewTransaction($isNew);
-
-
-		public function setRollbackOnAbort($rollbackOnAbort);
-
-
-		public function isManaged();
-
-
-		public function getMessages();
-
-
-		public function isValid();
-
-
-		public function setRollbackedRecord(\Phalcon\Mvc\ModelInterface $record);
-
-	}
+        public function setRollbackedRecord(\Phalcon\Mvc\ModelInterface $record);
+    }
 }

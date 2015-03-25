@@ -1,11 +1,10 @@
-<?php 
+<?php
+namespace Phalcon
+{
 
-namespace Phalcon {
-
-	abstract class Acl {
+    abstract class Acl {
 
 		const ALLOW = 1;
 
-		const DENY = ;
-	}
+		const DENY =
 }

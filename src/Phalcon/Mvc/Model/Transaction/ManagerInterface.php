@@ -1,34 +1,26 @@
-<?php 
+<?php
+namespace Phalcon\Mvc\Model\Transaction
+{
 
-namespace Phalcon\Mvc\Model\Transaction {
+    interface ManagerInterface
+    {
 
-	interface ManagerInterface {
+        public function __construct(\Phalcon\DiInterface $dependencyInjector = null);
 
-		public function __construct(\Phalcon\DiInterface $dependencyInjector=null);
+        public function has();
 
+        public function get($autoBegin = null);
 
-		public function has();
+        public function rollbackPendent();
 
+        public function commit();
 
-		public function get($autoBegin=null);
+        public function rollback($collect = null);
 
+        public function notifyRollback(\Phalcon\Mvc\Model\TransactionInterface $transaction);
 
-		public function rollbackPendent();
+        public function notifyCommit(\Phalcon\Mvc\Model\TransactionInterface $transaction);
 
-
-		public function commit();
-
-
-		public function rollback($collect=null);
-
-
-		public function notifyRollback(\Phalcon\Mvc\Model\TransactionInterface $transaction);
-
-
-		public function notifyCommit(\Phalcon\Mvc\Model\TransactionInterface $transaction);
-
-
-		public function collectTransactions();
-
-	}
+        public function collectTransactions();
+    }
 }

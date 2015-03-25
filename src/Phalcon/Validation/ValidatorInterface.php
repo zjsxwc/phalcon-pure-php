@@ -1,16 +1,14 @@
-<?php 
+<?php
+namespace Phalcon\Validation
+{
 
-namespace Phalcon\Validation {
+    interface ValidatorInterface
+    {
 
-	interface ValidatorInterface {
+        public function isSetOption($key);
 
-		public function isSetOption($key);
+        public function getOption($key);
 
-
-		public function getOption($key);
-
-
-		public function validate(\Phalcon\Validation $validator, $attribute);
-
-	}
+        public function validate(\Phalcon\Validation $validator, $attribute);
+    }
 }

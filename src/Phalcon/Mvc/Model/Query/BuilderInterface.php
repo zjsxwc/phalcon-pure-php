@@ -1,91 +1,64 @@
-<?php 
+<?php
+namespace Phalcon\Mvc\Model\Query
+{
 
-namespace Phalcon\Mvc\Model\Query {
+    interface BuilderInterface
+    {
 
-	interface BuilderInterface {
+        public function __construct($params = null);
 
-		public function __construct($params=null);
+        public function columns($columns);
 
+        public function getColumns();
 
-		public function columns($columns);
+        public function from($models);
 
+        public function addFrom($model, $alias = null);
 
-		public function getColumns();
+        public function getFrom();
 
+        public function join($model, $conditions = null, $alias = null);
 
-		public function from($models);
+        public function innerJoin($model, $conditions = null, $alias = null);
 
+        public function leftJoin($model, $conditions = null, $alias = null);
 
-		public function addFrom($model, $alias=null);
+        public function rightJoin($model, $conditions = null, $alias = null);
 
+        public function where($conditions, $bindParams = null, $bindTypes = null);
 
-		public function getFrom();
+        public function andWhere($conditions, $bindParams = null, $bindTypes = null);
 
+        public function orWhere($conditions, $bindParams = null, $bindTypes = null);
 
-		public function join($model, $conditions=null, $alias=null);
+        public function betweenWhere($expr, $minimum, $maximum);
 
+        public function notBetweenWhere($expr, $minimum, $maximum);
 
-		public function innerJoin($model, $conditions=null, $alias=null);
+        public function inWhere($expr, $values);
 
+        public function notInWhere($expr, $values);
 
-		public function leftJoin($model, $conditions=null, $alias=null);
+        public function getWhere();
 
+        public function orderBy($orderBy);
 
-		public function rightJoin($model, $conditions=null, $alias=null);
+        public function getOrderBy();
 
+        public function having($having);
 
-		public function where($conditions, $bindParams=null, $bindTypes=null);
+        public function getHaving();
 
+        public function limit($limit, $offset = null);
 
-		public function andWhere($conditions, $bindParams=null, $bindTypes=null);
+        public function getLimit();
 
+        public function groupBy($group);
 
-		public function orWhere($conditions, $bindParams=null, $bindTypes=null);
+        public function getGroupBy();
 
+        public function getPhql();
 
-		public function betweenWhere($expr, $minimum, $maximum);
-
-
-		public function notBetweenWhere($expr, $minimum, $maximum);
-
-
-		public function inWhere($expr, $values);
-
-
-		public function notInWhere($expr, $values);
-
-
-		public function getWhere();
-
-
-		public function orderBy($orderBy);
-
-
-		public function getOrderBy();
-
-
-		public function having($having);
-
-
-		public function getHaving();
-
-
-		public function limit($limit, $offset=null);
-
-
-		public function getLimit();
-
-
-		public function groupBy($group);
-
-
-		public function getGroupBy();
-
-
-		public function getPhql();
-
-
-		public function getQuery();
-
-	}
+        public function getQuery();
+    }
 }

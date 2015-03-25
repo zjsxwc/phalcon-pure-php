@@ -1,7 +1,8 @@
-<?php 
+<?php
+namespace Phalcon\Debug
+{
 
-namespace Phalcon\Debug {
-
-	class Exception extends \Phalcon\Exception {
-	}
+    class Exception extends \Phalcon\Exception
+    {
+    }
 }

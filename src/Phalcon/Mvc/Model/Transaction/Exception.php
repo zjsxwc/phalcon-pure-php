@@ -1,7 +1,8 @@
-<?php 
+<?php
+namespace Phalcon\Mvc\Model\Transaction
+{
 
-namespace Phalcon\Mvc\Model\Transaction {
-
-	class Exception extends \Phalcon\Mvc\Model\Exception {
-	}
+    class Exception extends \Phalcon\Mvc\Model\Exception
+    {
+    }
 }

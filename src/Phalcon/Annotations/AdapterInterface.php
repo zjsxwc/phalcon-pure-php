@@ -1,28 +1,22 @@
-<?php 
+<?php
+namespace Phalcon\Annotations
+{
 
-namespace Phalcon\Annotations {
+    interface AdapterInterface
+    {
 
-	interface AdapterInterface {
+        public function setReader(\Phalcon\Annotations\ReaderInterface $reader);
 
-		public function setReader(\Phalcon\Annotations\ReaderInterface $reader);
+        public function getReader();
 
+        public function get($className);
 
-		public function getReader();
+        public function getMethods($className);
 
+        public function getMethod($className, $methodName);
 
-		public function get($className);
+        public function getProperties($className);
 
-
-		public function getMethods($className);
-
-
-		public function getMethod($className, $methodName);
-
-
-		public function getProperties($className);
-
-
-		public function getProperty($className, $propertyName);
-
-	}
+        public function getProperty($className, $propertyName);
+    }
 }

@@ -1,7 +1,8 @@
-<?php 
+<?php
+namespace Phalcon\Logger
+{
 
-namespace Phalcon\Logger {
-
-	class Exception extends \Phalcon\Exception {
-	}
+    class Exception extends \Phalcon\Exception
+    {
+    }
 }

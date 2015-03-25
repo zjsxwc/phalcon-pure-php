@@ -1,6 +1,6 @@
-<?php 
-
-namespace Phalcon {
+<?php
+namespace Phalcon
+{
 
     /**
      * Phalcon\Translate
@@ -8,6 +8,7 @@ namespace Phalcon {
      * Translate component allows the creation of multi-language applications using
      * different adapters for translation lists.
      */
-	abstract class Translate {
-	}
+    abstract class Translate
+    {
+    }
 }

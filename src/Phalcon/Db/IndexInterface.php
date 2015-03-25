@@ -1,22 +1,18 @@
-<?php 
+<?php
+namespace Phalcon\Db
+{
 
-namespace Phalcon\Db {
+    interface IndexInterface
+    {
 
-	interface IndexInterface {
+        public function __construct($indexName, $columns, $type = null);
 
-		public function __construct($indexName, $columns, $type=null);
+        public function getName();
 
+        public function getColumns();
 
-		public function getName();
+        public function getType();
 
-
-		public function getColumns();
-
-
-		public function getType();
-
-
-		public static function __set_state($data);
-
-	}
+        public static function __set_state($data);
+    }
 }

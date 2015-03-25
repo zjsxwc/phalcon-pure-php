@@ -1,76 +1,54 @@
-<?php 
+<?php
+namespace Phalcon\Mvc\Model
+{
 
-namespace Phalcon\Mvc\Model {
+    interface CriteriaInterface
+    {
 
-	interface CriteriaInterface {
+        public function setModelName($modelName);
 
-		public function setModelName($modelName);
+        public function getModelName();
 
+        public function bind($bindParams);
 
-		public function getModelName();
+        public function bindTypes($bindTypes);
 
+        public function where($conditions);
 
-		public function bind($bindParams);
+        public function conditions($conditions);
 
+        public function orderBy($orderColumns);
 
-		public function bindTypes($bindTypes);
+        public function limit($limit, $offset = null);
 
+        public function forUpdate($forUpdate = null);
 
-		public function where($conditions);
+        public function sharedLock($sharedLock = null);
 
+        public function andWhere($conditions, $bindParams = null, $bindTypes = null);
 
-		public function conditions($conditions);
+        public function orWhere($conditions, $bindParams = null, $bindTypes = null);
 
+        public function betweenWhere($expr, $minimum, $maximum);
 
-		public function orderBy($orderColumns);
+        public function notBetweenWhere($expr, $minimum, $maximum);
 
+        public function inWhere($expr, $values);
 
-		public function limit($limit, $offset=null);
+        public function notInWhere($expr, $values);
 
+        public function getWhere();
 
-		public function forUpdate($forUpdate=null);
+        public function getConditions();
 
+        public function getLimit();
 
-		public function sharedLock($sharedLock=null);
+        public function getOrder();
 
+        public function getParams();
 
-		public function andWhere($conditions, $bindParams=null, $bindTypes=null);
+        public static function fromInput(\Phalcon\DiInterface $dependencyInjector, $modelName, $data);
 
-
-		public function orWhere($conditions, $bindParams=null, $bindTypes=null);
-
-
-		public function betweenWhere($expr, $minimum, $maximum);
-
-
-		public function notBetweenWhere($expr, $minimum, $maximum);
-
-
-		public function inWhere($expr, $values);
-
-
-		public function notInWhere($expr, $values);
-
-
-		public function getWhere();
-
-
-		public function getConditions();
-
-
-		public function getLimit();
-
-
-		public function getOrder();
-
-
-		public function getParams();
-
-
-		public static function fromInput(\Phalcon\DiInterface $dependencyInjector, $modelName, $data);
-
-
-		public function execute();
-
-	}
+        public function execute();
+    }
 }

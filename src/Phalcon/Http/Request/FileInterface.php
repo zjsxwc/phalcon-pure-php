@@ -1,28 +1,22 @@
-<?php 
+<?php
+namespace Phalcon\Http\Request
+{
 
-namespace Phalcon\Http\Request {
+    interface FileInterface
+    {
 
-	interface FileInterface {
+        public function __construct($file, $key = null);
 
-		public function __construct($file, $key=null);
+        public function getSize();
 
+        public function getName();
 
-		public function getSize();
+        public function getTempName();
 
+        public function getType();
 
-		public function getName();
+        public function getRealType();
 
-
-		public function getTempName();
-
-
-		public function getType();
-
-
-		public function getRealType();
-
-
-		public function moveTo($destination);
-
-	}
+        public function moveTo($destination);
+    }
 }

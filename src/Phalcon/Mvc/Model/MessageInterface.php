@@ -1,34 +1,26 @@
-<?php 
+<?php
+namespace Phalcon\Mvc\Model
+{
 
-namespace Phalcon\Mvc\Model {
+    interface MessageInterface
+    {
 
-	interface MessageInterface {
+        public function __construct($message, $field = null, $type = null);
 
-		public function __construct($message, $field=null, $type=null);
+        public function setType($type);
 
+        public function getType();
 
-		public function setType($type);
+        public function setMessage($message);
 
+        public function getMessage();
 
-		public function getType();
+        public function setField($field);
 
+        public function getField();
 
-		public function setMessage($message);
+        public function __toString();
 
-
-		public function getMessage();
-
-
-		public function setField($field);
-
-
-		public function getField();
-
-
-		public function __toString();
-
-
-		public static function __set_state($message);
-
-	}
+        public static function __set_state($message);
+    }
 }

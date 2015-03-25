@@ -1,16 +1,14 @@
-<?php 
+<?php
+namespace Phalcon\Paginator
+{
 
-namespace Phalcon\Paginator {
+    interface AdapterInterface
+    {
 
-	interface AdapterInterface {
+        public function __construct($config);
 
-		public function __construct($config);
+        public function setCurrentPage($page);
 
-
-		public function setCurrentPage($page);
-
-
-		public function getPaginate();
-
-	}
+        public function getPaginate();
+    }
 }

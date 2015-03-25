@@ -1,28 +1,22 @@
-<?php 
+<?php
+namespace Phalcon\Mvc\Model
+{
 
-namespace Phalcon\Mvc\Model {
+    interface ResultsetInterface
+    {
 
-	interface ResultsetInterface {
+        public function getType();
 
-		public function getType();
+        public function getFirst();
 
+        public function getLast();
 
-		public function getFirst();
+        public function setIsFresh($isFresh);
 
+        public function isFresh();
 
-		public function getLast();
+        public function getCache();
 
-
-		public function setIsFresh($isFresh);
-
-
-		public function isFresh();
-
-
-		public function getCache();
-
-
-		public function toArray();
-
-	}
+        public function toArray();
+    }
 }

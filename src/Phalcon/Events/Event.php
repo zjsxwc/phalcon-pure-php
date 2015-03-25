@@ -1,66 +1,70 @@
-<?php 
+<?php
+namespace Phalcon\Events
+{
 
-namespace Phalcon\Events {
+    /**
+     * Phalcon\Events\Event
+     *
+     * This class offers contextual information of a fired event in the EventsManager
+     */
+    class Event
+    {
 
-	/**
-	 * Phalcon\Events\Event
-	 *
-	 * This class offers contextual information of a fired event in the EventsManager
-	 */
-	
-	class Event {
+        protected $_type;
 
-		protected $_type;
+        protected $_source;
 
-		protected $_source;
+        protected $_data;
 
-		protected $_data;
+        protected $_stopped;
 
-		protected $_stopped;
+        protected $_cancelable;
 
-		protected $_cancelable;
+        public function setType($type)
+        {}
 
-		public function setType($type){ }
+        public function getType()
+        {}
 
+        public function getSource()
+        {}
 
-		public function getType(){ }
+        public function setData($data)
+        {}
 
+        public function getData()
+        {}
 
-		public function getSource(){ }
+        public function getCancelable()
+        {}
 
+        /**
+         * \Phalcon\Events\Event constructor
+         *
+         * @param
+         *            string type
+         * @param
+         *            object source
+         * @param
+         *            mixed data
+         * @param
+         *            boolean cancelable
+         */
+        public function __construct($type, $source, $data = null, $cancelable = null)
+        {}
 
-		public function setData($data){ }
+        /**
+         * Stops the event preventing propagation
+         */
+        public function stop()
+        {}
 
-
-		public function getData(){ }
-
-
-		public function getCancelable(){ }
-
-
-		/**
-		 * \Phalcon\Events\Event constructor
-		 *
-		 * @param string type
-		 * @param object source
-		 * @param mixed data
-		 * @param boolean cancelable
-		 */
-		public function __construct($type, $source, $data=null, $cancelable=null){ }
-
-
-		/**
-		 * Stops the event preventing propagation
-		 */
-		public function stop(){ }
-
-
-		/**
-		 * Check whether the event is currently stopped
-		 *
-		 * @return boolean
-		 */
-		public function isStopped(){ }
-
-	}
+        /**
+         * Check whether the event is currently stopped
+         *
+         * @return boolean
+         */
+        public function isStopped()
+        {}
+    }
 }

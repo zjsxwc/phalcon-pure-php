@@ -1,6 +1,6 @@
-<?php 
-
-namespace Phalcon\Debug {
+<?php
+namespace Phalcon\Debug
+{
 
 	/**
 	 * Phalcon\Debug\Dump
@@ -121,7 +121,10 @@ namespace Phalcon\Debug {
 		 * @param ...
 		 * @return string
 		 */
-		public function vars(){ }
+		public 
 
-	}
+
+    function vars()
+    {}
+}
 }

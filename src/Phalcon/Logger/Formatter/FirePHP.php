@@ -1,7 +1,8 @@
-<?php 
+<?php
+namespace Phalcon\Logger\Formatter
+{
 
-namespace Phalcon\Logger\Formatter {
-
-	class FirePHP {
-	}
+    class FirePHP
+    {
+    }
 }

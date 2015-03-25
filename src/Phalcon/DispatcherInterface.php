@@ -1,52 +1,38 @@
-<?php 
+<?php
+namespace Phalcon
+{
 
-namespace Phalcon {
+    interface DispatcherInterface
+    {
 
-	interface DispatcherInterface {
+        public function setActionSuffix($actionSuffix);
 
-		public function setActionSuffix($actionSuffix);
+        public function setDefaultNamespace($defaultNamespace);
 
+        public function setDefaultAction($actionName);
 
-		public function setDefaultNamespace($defaultNamespace);
+        public function setNamespaceName($namespaceName);
 
+        public function setModuleName($moduleName);
 
-		public function setDefaultAction($actionName);
+        public function setActionName($actionName);
 
+        public function getActionName();
 
-		public function setNamespaceName($namespaceName);
+        public function setParams($params);
 
+        public function getParams();
 
-		public function setModuleName($moduleName);
+        public function setParam($param, $value);
 
+        public function getParam($param, $filters = null);
 
-		public function setActionName($actionName);
+        public function isFinished();
 
+        public function getReturnedValue();
 
-		public function getActionName();
+        public function dispatch();
 
-
-		public function setParams($params);
-
-
-		public function getParams();
-
-
-		public function setParam($param, $value);
-
-
-		public function getParam($param, $filters=null);
-
-
-		public function isFinished();
-
-
-		public function getReturnedValue();
-
-
-		public function dispatch();
-
-
-		public function forward($forward);
-
-	}
+        public function forward($forward);
+    }
 }

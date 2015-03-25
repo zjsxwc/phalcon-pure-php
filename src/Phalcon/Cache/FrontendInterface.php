@@ -1,28 +1,22 @@
-<?php 
+<?php
+namespace Phalcon\Cache
+{
 
-namespace Phalcon\Cache {
+    interface FrontendInterface
+    {
 
-	interface FrontendInterface {
+        public function getLifetime();
 
-		public function getLifetime();
+        public function isBuffering();
 
+        public function start();
 
-		public function isBuffering();
+        public function getContent();
 
+        public function stop();
 
-		public function start();
+        public function beforeStore($data);
 
-
-		public function getContent();
-
-
-		public function stop();
-
-
-		public function beforeStore($data);
-
-
-		public function afterRetrieve($data);
-
-	}
+        public function afterRetrieve($data);
+    }
 }

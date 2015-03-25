@@ -1,115 +1,80 @@
-<?php 
+<?php
+namespace Phalcon\Mvc
+{
 
-namespace Phalcon\Mvc {
+    interface ViewInterface
+    {
 
-	interface ViewInterface {
+        public function setViewsDir($viewsDir);
 
-		public function setViewsDir($viewsDir);
+        public function getViewsDir();
 
+        public function setLayoutsDir($layoutsDir);
 
-		public function getViewsDir();
+        public function getLayoutsDir();
 
+        public function setPartialsDir($partialsDir);
 
-		public function setLayoutsDir($layoutsDir);
+        public function getPartialsDir();
 
+        public function setBasePath($basePath);
 
-		public function getLayoutsDir();
+        public function setRenderLevel($level);
 
+        public function setMainView($viewPath);
 
-		public function setPartialsDir($partialsDir);
+        public function getMainView();
 
+        public function setLayout($layout);
 
-		public function getPartialsDir();
+        public function getLayout();
 
+        public function setTemplateBefore($templateBefore);
 
-		public function setBasePath($basePath);
+        public function cleanTemplateBefore();
 
+        public function setTemplateAfter($templateAfter);
 
-		public function setRenderLevel($level);
+        public function cleanTemplateAfter();
 
+        public function setParamToView($key, $value);
 
-		public function setMainView($viewPath);
+        public function setVar($key, $value);
 
+        public function getParamsToView();
 
-		public function getMainView();
+        public function getControllerName();
 
+        public function getActionName();
 
-		public function setLayout($layout);
+        public function getParams();
 
+        public function start();
 
-		public function getLayout();
+        public function registerEngines($engines);
 
+        public function render($controllerName, $actionName, $params = null);
 
-		public function setTemplateBefore($templateBefore);
+        public function pick($renderView);
 
+        public function partial($partialPath);
 
-		public function cleanTemplateBefore();
+        public function finish();
 
+        public function getCache();
 
-		public function setTemplateAfter($templateAfter);
+        public function cache($options = null);
 
+        public function setContent($content);
 
-		public function cleanTemplateAfter();
+        public function getContent();
 
+        public function getActiveRenderPath();
 
-		public function setParamToView($key, $value);
+        public function disable();
 
+        public function enable();
 
-		public function setVar($key, $value);
-
-
-		public function getParamsToView();
-
-
-		public function getControllerName();
-
-
-		public function getActionName();
-
-
-		public function getParams();
-
-
-		public function start();
-
-
-		public function registerEngines($engines);
-
-
-		public function render($controllerName, $actionName, $params=null);
-
-
-		public function pick($renderView);
-
-
-		public function partial($partialPath);
-
-
-		public function finish();
-
-
-		public function getCache();
-
-
-		public function cache($options=null);
-
-
-		public function setContent($content);
-
-
-		public function getContent();
-
-
-		public function getActiveRenderPath();
-
-
-		public function disable();
-
-
-		public function enable();
-
-
-		public function reset();
-
-	}
+        public function reset();
+    }
 }

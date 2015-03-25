@@ -1,6 +1,6 @@
-<?php 
-
-namespace Phalcon\Cli\Router {
+<?php
+namespace Phalcon\Cli\Router
+{
 
 	/**
 	 * Phalcon\Cli\Router\Route
@@ -29,9 +29,12 @@ namespace Phalcon\Cli\Router {
 
 		protected $_delimiter;
 
-		protected static $_uniqueId;
+		protected 
 
-		protected static $_delimiterPath;
+    static $_uniqueId;
+
+		protected 
+    static $_delimiterPath;
 
 		/**
 		 * \Phalcon\Cli\Router\Route constructor
@@ -39,7 +42,10 @@ namespace Phalcon\Cli\Router {
 		 * @param string pattern
 		 * @param array paths
 		 */
-		public function __construct($pattern, $paths=null){ }
+		public 
+
+    function __construct($pattern, $paths = null)
+    {}
 
 
 		/**
@@ -48,7 +54,10 @@ namespace Phalcon\Cli\Router {
 		 * @param string pattern
 		 * @return string
 		 */
-		public function compilePattern($pattern){ }
+		public 
+
+    function compilePattern($pattern)
+    {}
 
 
 		/**
@@ -57,7 +66,10 @@ namespace Phalcon\Cli\Router {
 		 * @param string pattern
 		 * @return array|boolean
 		 */
-		public function extractNamedParams($pattern){ }
+		public 
+
+    function extractNamedParams($pattern)
+    {}
 
 
 		/**
@@ -66,7 +78,10 @@ namespace Phalcon\Cli\Router {
 		 * @param string pattern
 		 * @param array paths
 		 */
-		public function reConfigure($pattern, $paths=null){ }
+		public 
+
+    function reConfigure($pattern, $paths = null)
+    {}
 
 
 		/**
@@ -74,7 +89,10 @@ namespace Phalcon\Cli\Router {
 		 *
 		 * @return string
 		 */
-		public function getName(){ }
+		public 
+
+    function getName()
+    {}
 
 
 		/**
@@ -89,7 +107,10 @@ namespace Phalcon\Cli\Router {
 		 * @param string name
 		 * @return \Phalcon\Cli\Router\Route
 		 */
-		public function setName($name){ }
+		public 
+
+    function setName($name)
+    {}
 
 
 		/**
@@ -100,7 +121,10 @@ namespace Phalcon\Cli\Router {
 		 * @param callback callback
 		 * @return \Phalcon\Cli\Router\Route
 		 */
-		public function beforeMatch($callback){ }
+		public 
+
+    function beforeMatch($callback)
+    {}
 
 
 		/**
@@ -108,7 +132,10 @@ namespace Phalcon\Cli\Router {
 		 *
 		 * @return mixed
 		 */
-		public function getBeforeMatch(){ }
+		public 
+
+    function getBeforeMatch()
+    {}
 
 
 		/**
@@ -116,7 +143,10 @@ namespace Phalcon\Cli\Router {
 		 *
 		 * @return string
 		 */
-		public function getRouteId(){ }
+		public 
+
+    function getRouteId()
+    {}
 
 
 		/**
@@ -124,7 +154,10 @@ namespace Phalcon\Cli\Router {
 		 *
 		 * @return string
 		 */
-		public function getPattern(){ }
+		public 
+
+    function getPattern()
+    {}
 
 
 		/**
@@ -132,7 +165,10 @@ namespace Phalcon\Cli\Router {
 		 *
 		 * @return string
 		 */
-		public function getCompiledPattern(){ }
+		public 
+
+    function getCompiledPattern()
+    {}
 
 
 		/**
@@ -140,7 +176,10 @@ namespace Phalcon\Cli\Router {
 		 *
 		 * @return array
 		 */
-		public function getPaths(){ }
+		public 
+
+    function getPaths()
+    {}
 
 
 		/**
@@ -148,7 +187,10 @@ namespace Phalcon\Cli\Router {
 		 *
 		 * @return array
 		 */
-		public function getReversedPaths(){ }
+		public 
+
+    function getReversedPaths()
+    {}
 
 
 		/**
@@ -158,7 +200,10 @@ namespace Phalcon\Cli\Router {
 		 * @param callable converter
 		 * @return \Phalcon\Cli\Router\Route
 		 */
-		public function convert($name, $converter){ }
+		public 
+
+    function convert($name, $converter)
+    {}
 
 
 		/**
@@ -166,19 +211,28 @@ namespace Phalcon\Cli\Router {
 		 *
 		 * @return array
 		 */
-		public function getConverters(){ }
+		public 
+
+    function getConverters()
+    {}
 
 
 		/**
 		 * Resets the internal route id generator
 		 */
-		public static function reset(){ }
+		public static 
+
+    function reset()
+    {}
 
 
 		/**
 		 * Set the routing delimiter
 		 */
-		public static function delimiter($delimiter=null){ }
+		public static 
+
+    function delimiter($delimiter = null)
+    {}
 
 
 		/**
@@ -186,7 +240,9 @@ namespace Phalcon\Cli\Router {
 		 *
 		 * @return string
 		 */
-		public static function getDelimiter(){ }
+		public static 
 
-	}
+    function getDelimiter()
+    {}
+}
 }

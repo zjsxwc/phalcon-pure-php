@@ -1,11 +1,12 @@
-<?php 
+<?php
+namespace Phalcon\Mvc\Model
+{
 
-namespace Phalcon\Mvc\Model {
+    class ValidationFailed extends \Phalcon\Mvc\Model\Exception
+    {
 
-	class ValidationFailed extends \Phalcon\Mvc\Model\Exception {
+        protected $_model;
 
-		protected $_model;
-
-		protected $_messages;
-	}
+        protected $_messages;
+    }
 }

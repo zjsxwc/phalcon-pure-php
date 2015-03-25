@@ -1,19 +1,16 @@
-<?php 
+<?php
+namespace Phalcon\Acl
+{
 
-namespace Phalcon\Acl {
+    interface RoleInterface
+    {
 
-	interface RoleInterface {
+        public function __construct($name, $description = null);
 
-		public function __construct($name, $description=null);
+        public function getName();
 
+        public function getDescription();
 
-		public function getName();
-
-
-		public function getDescription();
-
-
-		public function __toString();
-
-	}
+        public function __toString();
+    }
 }

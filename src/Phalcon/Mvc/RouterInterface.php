@@ -1,82 +1,58 @@
-<?php 
+<?php
+namespace Phalcon\Mvc
+{
 
-namespace Phalcon\Mvc {
+    interface RouterInterface
+    {
 
-	interface RouterInterface {
+        public function setDefaultModule($moduleName);
 
-		public function setDefaultModule($moduleName);
+        public function setDefaultController($controllerName);
 
+        public function setDefaultAction($actionName);
 
-		public function setDefaultController($controllerName);
+        public function setDefaults($defaults);
 
+        public function handle($uri = null);
 
-		public function setDefaultAction($actionName);
+        public function add($pattern, $paths = null, $httpMethods = null);
 
+        public function addGet($pattern, $paths = null);
 
-		public function setDefaults($defaults);
+        public function addPost($pattern, $paths = null);
 
+        public function addPut($pattern, $paths = null);
 
-		public function handle($uri=null);
+        public function addPatch($pattern, $paths = null);
 
+        public function addDelete($pattern, $paths = null);
 
-		public function add($pattern, $paths=null, $httpMethods=null);
+        public function addOptions($pattern, $paths = null);
 
+        public function addHead($pattern, $paths = null);
 
-		public function addGet($pattern, $paths=null);
+        public function clear();
 
+        public function getModuleName();
 
-		public function addPost($pattern, $paths=null);
+        public function getNamespaceName();
 
+        public function getControllerName();
 
-		public function addPut($pattern, $paths=null);
+        public function getActionName();
 
+        public function getParams();
 
-		public function addPatch($pattern, $paths=null);
+        public function getMatchedRoute();
 
+        public function getMatches();
 
-		public function addDelete($pattern, $paths=null);
+        public function wasMatched();
 
+        public function getRoutes();
 
-		public function addOptions($pattern, $paths=null);
+        public function getRouteById($id);
 
-
-		public function addHead($pattern, $paths=null);
-
-
-		public function clear();
-
-
-		public function getModuleName();
-
-
-		public function getNamespaceName();
-
-
-		public function getControllerName();
-
-
-		public function getActionName();
-
-
-		public function getParams();
-
-
-		public function getMatchedRoute();
-
-
-		public function getMatches();
-
-
-		public function wasMatched();
-
-
-		public function getRoutes();
-
-
-		public function getRouteById($id);
-
-
-		public function getRouteByName($name);
-
-	}
+        public function getRouteByName($name);
+    }
 }

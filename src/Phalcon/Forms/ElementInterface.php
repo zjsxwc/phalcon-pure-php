@@ -1,100 +1,70 @@
-<?php 
+<?php
+namespace Phalcon\Forms
+{
 
-namespace Phalcon\Forms {
+    interface ElementInterface
+    {
 
-	interface ElementInterface {
+        public function setForm(\Phalcon\Forms\Form $form);
 
-		public function setForm(\Phalcon\Forms\Form $form);
+        public function getForm();
 
+        public function setName($name);
 
-		public function getForm();
+        public function getName();
 
+        public function setFilters($filters);
 
-		public function setName($name);
+        public function addFilter($filter);
 
+        public function getFilters();
 
-		public function getName();
+        public function addValidators($validators, $merge = null);
 
+        public function addValidator(\Phalcon\Validation\ValidatorInterface $validator);
 
-		public function setFilters($filters);
+        public function getValidators();
 
+        public function prepareAttributes($attributes = null, $useChecked = null);
 
-		public function addFilter($filter);
+        public function setAttribute($attribute, $value);
 
+        public function getAttribute($attribute, $defaultValue = null);
 
-		public function getFilters();
+        public function setAttributes($attributes);
 
+        public function getAttributes();
 
-		public function addValidators($validators, $merge=null);
+        public function setUserOption($option, $value);
 
+        public function getUserOption($option, $defaultValue = null);
 
-		public function addValidator(\Phalcon\Validation\ValidatorInterface $validator);
+        public function setUserOptions($options);
 
+        public function getUserOptions();
 
-		public function getValidators();
+        public function setLabel($label);
 
+        public function getLabel();
 
-		public function prepareAttributes($attributes=null, $useChecked=null);
+        public function label();
 
+        public function setDefault($value);
 
-		public function setAttribute($attribute, $value);
+        public function getDefault();
 
+        public function getValue();
 
-		public function getAttribute($attribute, $defaultValue=null);
+        public function getMessages();
 
+        public function hasMessages();
 
-		public function setAttributes($attributes);
+        public function setMessages(\Phalcon\Validation\Message\Group $group);
 
+        public function appendMessage(\Phalcon\Validation\MessageInterface $message);
 
-		public function getAttributes();
+        public function clear();
 
-
-		public function setUserOption($option, $value);
-
-
-		public function getUserOption($option, $defaultValue=null);
-
-
-		public function setUserOptions($options);
-
-
-		public function getUserOptions();
-
-
-		public function setLabel($label);
-
-
-		public function getLabel();
-
-
-		public function label();
-
-
-		public function setDefault($value);
-
-
-		public function getDefault();
-
-
-		public function getValue();
-
-
-		public function getMessages();
-
-
-		public function hasMessages();
-
-
-		public function setMessages(\Phalcon\Validation\Message\Group $group);
-
-
-		public function appendMessage(\Phalcon\Validation\MessageInterface $message);
-
-
-		public function clear();
-
-
-		public function render($attributes=null);
-
-	}
+        public function render($attributes = null);
+    }
 }

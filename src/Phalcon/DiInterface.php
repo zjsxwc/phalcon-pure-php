@@ -1,52 +1,38 @@
-<?php 
+<?php
+namespace Phalcon
+{
 
-namespace Phalcon {
+    interface DiInterface
+    {
 
-	interface DiInterface {
+        public function set($name, $definition, $shared = null);
 
-		public function set($name, $definition, $shared=null);
+        public function setShared($name, $definition);
 
+        public function remove($name);
 
-		public function setShared($name, $definition);
+        public function attempt($name, $definition, $shared = null);
 
+        public function get($name, $parameters = null);
 
-		public function remove($name);
+        public function getShared($name, $parameters = null);
 
+        public function setRaw($name, \Phalcon\Di\ServiceInterface $rawDefinition);
 
-		public function attempt($name, $definition, $shared=null);
+        public function getRaw($name);
 
+        public function getService($name);
 
-		public function get($name, $parameters=null);
+        public function has($name);
 
+        public function wasFreshInstance();
 
-		public function getShared($name, $parameters=null);
+        public function getServices();
 
+        public static function setDefault(\Phalcon\DiInterface $dependencyInjector);
 
-		public function setRaw($name, \Phalcon\Di\ServiceInterface $rawDefinition);
+        public static function getDefault();
 
-
-		public function getRaw($name);
-
-
-		public function getService($name);
-
-
-		public function has($name);
-
-
-		public function wasFreshInstance();
-
-
-		public function getServices();
-
-
-		public static function setDefault(\Phalcon\DiInterface $dependencyInjector);
-
-
-		public static function getDefault();
-
-
-		public static function reset();
-
-	}
+        public static function reset();
+    }
 }

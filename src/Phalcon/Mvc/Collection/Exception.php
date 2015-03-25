@@ -1,7 +1,8 @@
-<?php 
+<?php
+namespace Phalcon\Mvc\Collection
+{
 
-namespace Phalcon\Mvc\Collection {
-
-	class Exception extends \Phalcon\Exception {
-	}
+    class Exception extends \Phalcon\Exception
+    {
+    }
 }

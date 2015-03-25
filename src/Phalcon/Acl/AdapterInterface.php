@@ -1,58 +1,42 @@
-<?php 
+<?php
+namespace Phalcon\Acl
+{
 
-namespace Phalcon\Acl {
+    interface AdapterInterface
+    {
 
-	interface AdapterInterface {
+        public function setDefaultAction($defaultAccess);
 
-		public function setDefaultAction($defaultAccess);
+        public function getDefaultAction();
 
+        public function addRole($role, $accessInherits = null);
 
-		public function getDefaultAction();
+        public function addInherit($roleName, $roleToInherit);
 
+        public function isRole($roleName);
 
-		public function addRole($role, $accessInherits=null);
+        public function isResource($resourceName);
 
+        public function addResource($resourceObject, $accessList = null);
 
-		public function addInherit($roleName, $roleToInherit);
+        public function addResourceAccess($resourceName, $accessList);
 
+        public function dropResourceAccess($resourceName, $accessList);
 
-		public function isRole($roleName);
+        public function allow($roleName, $resourceName, $access);
 
+        public function deny($roleName, $resourceName, $access);
 
-		public function isResource($resourceName);
+        public function isAllowed($roleName, $resourceName, $access);
 
+        public function getActiveRole();
 
-		public function addResource($resourceObject, $accessList=null);
+        public function getActiveResource();
 
+        public function getActiveAccess();
 
-		public function addResourceAccess($resourceName, $accessList);
+        public function getRoles();
 
-
-		public function dropResourceAccess($resourceName, $accessList);
-
-
-		public function allow($roleName, $resourceName, $access);
-
-
-		public function deny($roleName, $resourceName, $access);
-
-
-		public function isAllowed($roleName, $resourceName, $access);
-
-
-		public function getActiveRole();
-
-
-		public function getActiveResource();
-
-
-		public function getActiveAccess();
-
-
-		public function getRoles();
-
-
-		public function getResources();
-
-	}
+        public function getResources();
+    }
 }

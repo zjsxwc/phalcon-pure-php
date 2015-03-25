@@ -1,58 +1,42 @@
-<?php 
+<?php
+namespace Phalcon\Http
+{
 
-namespace Phalcon\Http {
+    interface ResponseInterface
+    {
 
-	interface ResponseInterface {
+        public function setStatusCode($code, $message);
 
-		public function setStatusCode($code, $message);
+        public function getHeaders();
 
+        public function setHeader($name, $value);
 
-		public function getHeaders();
+        public function setRawHeader($header);
 
+        public function resetHeaders();
 
-		public function setHeader($name, $value);
+        public function setExpires(\DateTime $datetime);
 
+        public function setNotModified();
 
-		public function setRawHeader($header);
+        public function setContentType($contentType, $charset = null);
 
+        public function redirect($location = null, $externalRedirect = null, $statusCode = null);
 
-		public function resetHeaders();
+        public function setContent($content);
 
+        public function setJsonContent($content);
 
-		public function setExpires(\DateTime $datetime);
+        public function appendContent($content);
 
+        public function getContent();
 
-		public function setNotModified();
+        public function sendHeaders();
 
+        public function sendCookies();
 
-		public function setContentType($contentType, $charset=null);
+        public function send();
 
-
-		public function redirect($location=null, $externalRedirect=null, $statusCode=null);
-
-
-		public function setContent($content);
-
-
-		public function setJsonContent($content);
-
-
-		public function appendContent($content);
-
-
-		public function getContent();
-
-
-		public function sendHeaders();
-
-
-		public function sendCookies();
-
-
-		public function send();
-
-
-		public function setFileToSend($filePath, $attachmentName=null);
-
-	}
+        public function setFileToSend($filePath, $attachmentName = null);
+    }
 }

@@ -159,7 +159,7 @@ namespace Phalcon
         public static function getDI()
         {
             if (! is_object(self::$_dependencyInjector)) {
-                return \Phalcon\Di::getDefault();
+                self::$_dependencyInjector = \Phalcon\Di::getDefault();
             }
             return self::$_dependencyInjector;
         }
@@ -172,13 +172,7 @@ namespace Phalcon
         public static function getUrlService()
         {
             if (! is_object(self::$_urlService)) {
-                $dependencyInjector = self::getDI();
-                
-                if (! is_object($dependencyInjector)) {
-                    throw new Exception("A dependency injector container is required to obtain the 'url' service");
-                }
-                
-                self::$_urlService = $dependencyInjector->getShared('url');
+                self::$_urlService = self::getDI()->getShared('url');
             }
             
             return self::$_urlService;
@@ -192,13 +186,7 @@ namespace Phalcon
         public static function getEscaperService()
         {
             if (! is_object(self::$_escaperService)) {
-                $dependencyInjector = self::getDI();
-                
-                if (! is_object($dependencyInjector)) {
-                    throw new Exception("A dependency injector container is required to obtain the 'escaper' service");
-                }
-                
-                self::$_escaperService = $dependencyInjector->getShared('escaper');
+                self::$_escaperService = self::getDI()->getShared('escaper');
             }
             
             return self::$_escaperService;

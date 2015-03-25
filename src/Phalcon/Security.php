@@ -233,10 +233,6 @@ namespace Phalcon
          */
         public function checkToken($tokenKey = null, $tokenValue = null)
         {
-            if (! is_object($this->_dependencyInjector)) {
-                throw new Exception("A dependency injection container is required to access the 'session' service");
-            }
-            
             $session = $this->_dependencyInjector->getShared('session');
             
             if (! $tokenKey) {
@@ -267,10 +263,6 @@ namespace Phalcon
          */
         public function getSessionToken()
         {
-            if (! is_object($this->_dependencyInjector)) {
-                throw new Exception("A dependency injection container is required to access the 'session' service");
-            }
-            
             return $this->_dependencyInjector->getShared('session')->get('$PHALCON/CSRF$');
         }
 

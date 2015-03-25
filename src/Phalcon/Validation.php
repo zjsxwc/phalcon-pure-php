@@ -415,17 +415,8 @@ namespace Phalcon
             if ($value != null) {
                 if (is_array($this->_filters) && isset($this->_filters[$field]) && $this->_filters[$field]) {
                     $dependencyInjector = $this->getDI();
-                    if (! is_object($dependencyInjector)) {
-                        $dependencyInjector = \Phalcon\Di::getDefault();
-                        if (! is_object($dependencyInjector)) {
-                            throw new Exception("A dependency injector is required to obtain the 'filter' service");
-                        }
-                    }
                     
                     $filterService = $dependencyInjector->getShared('filter');
-                    if (! is_object($filterService)) {
-                        throw new Exception("Returned 'filter' service is invalid");
-                    }
                     
                     return $filterService->sanitize($value, $this->_filters[$field]);
                 }

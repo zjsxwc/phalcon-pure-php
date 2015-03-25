@@ -168,7 +168,7 @@ namespace Phalcon
          */
         public static function startsWith($str, $start, $ignoreCase = null)
         {
-            return ($ignoreCase ? strcasecmp($start, substr($str, 0, strlen($start))) : strcmp($start, substr($str, 0, strlen($start)))) == 0;
+            return starts_with($str, $start, $ignoreCase);
         }
 
         /**
@@ -190,7 +190,7 @@ namespace Phalcon
          */
         public static function endsWith($str, $end, $ignoreCase = null)
         {
-            return ($ignoreCase ? strcasecmp($end, substr($str, - strlen($end))) : strcmp($end, substr($str, - strlen($end)))) == 0;
+            return ends_with($str, $end, $ignoreCase);
         }
 
         /**

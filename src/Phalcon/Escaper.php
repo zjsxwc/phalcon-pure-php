@@ -2,6 +2,9 @@
 namespace Phalcon
 {
 
+    use Phalcon\EscaperInterface;
+    use Phalcon\Escaper\Exception;
+
     /**
      * Phalcon\Escaper
      *
@@ -19,11 +22,11 @@ namespace Phalcon
     class Escaper implements \Phalcon\EscaperInterface
     {
 
-        protected $_encoding;
+        protected $_encoding = 'utf-8';
 
-        protected $_htmlEscapeMap;
+        protected $_htmlEscapeMap = null;
 
-        protected $_htmlQuoteType;
+        protected $_htmlQuoteType = 3;
 
         /**
          * Sets the encoding to be used by the escaper
@@ -36,7 +39,9 @@ namespace Phalcon
          *            string encoding
          */
         public function setEncoding($encoding)
-        {}
+        {
+            $this->_encoding = $encoding;
+        }
 
         /**
          * Returns the internal encoding used by the escaper
@@ -44,7 +49,9 @@ namespace Phalcon
          * @return string
          */
         public function getEncoding()
-        {}
+        {
+            return $this->_encoding;
+        }
 
         /**
          * Sets the HTML quoting type for htmlspecialchars
@@ -57,7 +64,9 @@ namespace Phalcon
          *            int quoteType
          */
         public function setHtmlQuoteType($quoteType)
-        {}
+        {
+            $this->_htmlQuoteType = $quoteType;
+        }
 
         /**
          * Detect the character encoding of a string to be handled by an encoder
@@ -68,7 +77,33 @@ namespace Phalcon
          * @return string/null
          */
         public function detectEncoding($str)
-        {}
+        {
+            /**
+             * Check if charset is ASCII or ISO-8859-1
+             */
+            $charset = is_basic_charset($str);
+            if (is_string($charset)) {
+                return $charset;
+            }
+            
+            /**
+             * We require mbstring extension here
+             */
+            if (! function_exists('mb_detect_encoding')) {
+                return null;
+            }
+            
+            /**
+             * Strict encoding detection with fallback to non-strict detection.
+             * Check encoding
+             */
+            foreach (array(
+                'UTF-32',
+                'UTF-8',
+                'ISO-8859-1',
+                'ASCII'
+            ) as $charset) {}
+        }
 
         /**
          * Utility to normalize a string's encoding to UTF-32.

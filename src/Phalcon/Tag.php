@@ -935,10 +935,10 @@ namespace Phalcon
                 $parameters['id'] = $id;
             }
             
-            if ( isset($parameters['value'])) {
+            if (isset($parameters['value'])) {
                 $content = $parameters['value'];
                 unset($parameters['value']);
-            }else{
+            } else {
                 $content = self::getValue($id, $parameters);
             }
             
@@ -974,32 +974,32 @@ namespace Phalcon
                 );
             }
             
-            $paramsAction = isset($parameters[0]) ? $parameters[0] : (isset($parameters['action'] ? $parameters['action'] : ''));
+            $paramsAction = isset($parameters[0]) ? $parameters[0] : (isset($parameters['action']) ? $parameters['action'] : '');
             
             /**
              * By default the method is POST
              */
-             if (! isset($parameters['method'])) {
-                 $parameters['method'] = 'post';
-             }
-             
-             $action = null;
-             
-             if(! empty($paramsAction)) {
-                 $action = self::getUrlService()->get($paramsAction);
-             }
-             
-             /**
-              * Check for extra parameters
+            if (! isset($parameters['method'])) {
+                $parameters['method'] = 'post';
+            }
+            
+            $action = null;
+            
+            if (! empty($paramsAction)) {
+                $action = self::getUrlService()->get($paramsAction);
+            }
+            
+            /**
+             * Check for extra parameters
              */
-             if(isset($parameters['parameters'])){
-                 $action .= $parameters['parameters'];
-             }
-             
-             $code = self::renderAttributes('<form', $parameters);
-             $code .= '>';
-             
-             return $code;
+            if (isset($parameters['parameters'])) {
+                $action .= $parameters['parameters'];
+            }
+            
+            $code = self::renderAttributes('<form', $parameters);
+            $code .= '>';
+            
+            return $code;
         }
 
         /**
@@ -1024,7 +1024,7 @@ namespace Phalcon
          */
         public static function setTitle($title)
         {
-            self::_documentTitle = $title;
+            self::$_documentTitle = $title;
         }
 
         /**
@@ -1039,7 +1039,7 @@ namespace Phalcon
          */
         public static function setTitleSeparator($titleSeparator)
         {
-            self::_documentTitleSeparator = $titleSeparator;
+            self::$_documentTitleSeparator = $titleSeparator;
         }
 
         /**
@@ -1050,7 +1050,7 @@ namespace Phalcon
          */
         public static function appendTitle($title)
         {
-            self::_documentTitle = self::_documentTitle . self::_documentTitleSeparator . $title;
+            self::$_documentTitle = self::$_documentTitle . self::$_documentTitleSeparator . $title;
         }
 
         /**
@@ -1061,7 +1061,7 @@ namespace Phalcon
          */
         public static function prependTitle($title)
         {
-            self::_documentTitle = $title . self::_documentTitleSeparator . self::_documentTitle;
+            self::$_documentTitle = $title . self::$_documentTitleSeparator . self::$_documentTitle;
         }
 
         /**
@@ -1080,9 +1080,9 @@ namespace Phalcon
         public static function getTitle($tags = null)
         {
             if ($tags) {
-                return '<title>' . self::_documentTitle . '</title>'; 
+                return '<title>' . self::$_documentTitle . '</title>';
             }
-            return self::_documentTitle;
+            return self::$_documentTitle;
         }
 
         /**
@@ -1100,7 +1100,7 @@ namespace Phalcon
          */
         public static function getTitleSeparator()
         {
-            return self::_documentTitleSeparator;
+            return self::$_documentTitleSeparator;
         }
 
         /**
@@ -1125,14 +1125,17 @@ namespace Phalcon
          */
         public static function stylesheetLink($parameters = null, $local = null)
         {
-            if (! is_array($parameters)){
-                $parameters = array($parameters, $local);
+            if (! is_array($parameters)) {
+                $parameters = array(
+                    $parameters,
+                    $local
+                );
             }
             
             if (isset($parameters[1])) {
                 $local = $parameters[1] != false;
-            }else{
-                if (isset($parameters['local'])){
+            } else {
+                if (isset($parameters['local'])) {
                     $local = $parameters['local'] != false;
                     unset($parameters['local']);
                 }
@@ -1149,26 +1152,26 @@ namespace Phalcon
             /**
              * URLs are generated through the "url" service
              */
-             if ($local === true) {
-                 $parameters['href'] = self::getUrlService()->get($parameters['href']);
-             }
-             
-             if (! isset($parameters['rel'])){
-                 $parameters['rel'] = 'stylesheet';
-             }
-             
-             $code = self::renderAttributes('<link', $parameters);
-             
-             /**
-              * Check if Doctype is XHTML
-              */
-              if (self::_documentType > self::HTML5) {
-                  $code .= '/>' . PHP_EOL;
-              } else {
-                $code .= '>' . PHP_EOL;  
-              }
-              
-              return $code;
+            if ($local === true) {
+                $parameters['href'] = self::getUrlService()->get($parameters['href']);
+            }
+            
+            if (! isset($parameters['rel'])) {
+                $parameters['rel'] = 'stylesheet';
+            }
+            
+            $code = self::renderAttributes('<link', $parameters);
+            
+            /**
+             * Check if Doctype is XHTML
+             */
+            if (self::$_documentType > self::HTML5) {
+                $code .= '/>' . PHP_EOL;
+            } else {
+                $code .= '>' . PHP_EOL;
+            }
+            
+            return $code;
         }
 
         /**
@@ -1193,36 +1196,38 @@ namespace Phalcon
          */
         public static function javascriptInclude($parameters = null, $local = null)
         {
-            if (! is_array($parameters)){
-                $parameters = array($parameters, $local);
+            if (! is_array($parameters)) {
+                $parameters = array(
+                    $parameters,
+                    $local
+                );
             }
             
-            if(isset($parameters[1])){
+            if (isset($parameters[1])) {
                 $local = $parameters[1] != false;
-            }else{
-                if(isset($parameters['local'])){
+            } else {
+                if (isset($parameters['local'])) {
                     $local = $parameters['local'] != false;
                     unset($parameters['local']);
                 }
             }
             
-            if(!isset($parameters['type'])){
+            if (! isset($parameters['type'])) {
                 $parameters['type'] = 'text/javascript';
             }
             
-            
-            if(!isset($parameters['src'])){
-                $parameters['src'] = isset($parameters[0])? $parameters[0] : '';
+            if (! isset($parameters['src'])) {
+                $parameters['src'] = isset($parameters[0]) ? $parameters[0] : '';
             }
             
             /**
              * URLs are generated through the "url" service
-            */
-            if($local === true){
+             */
+            if ($local === true) {
                 $parameters['src'] = self::getUrlService()->getStatic($parameters['src']);
             }
             
-            $code = self::renderAttributes('<script',$parameters);
+            $code = self::renderAttributes('<script', $parameters);
             $code .= '></script>' . PHP_EOL;
             
             return $code;
@@ -1251,33 +1256,35 @@ namespace Phalcon
          */
         public static function image($parameters = null, $local = null)
         {
-            if(!is_array($parameters)){
-                $parameters = array($parameters);
+            if (! is_array($parameters)) {
+                $parameters = array(
+                    $parameters
+                );
             }
             
-            if(!isset($parameters['src'])){
-                $parameters['src'] = isset($parameters[0]) ? $parameters[0]:'';
+            if (! isset($parameters['src'])) {
+                $parameters['src'] = isset($parameters[0]) ? $parameters[0] : '';
             }
             
             /**
              * Use the "url" service if the URI is local
              */
-            if($local){
+            if ($local) {
                 $parameters['src'] = self::getUrlService()->getStatic($parameters['src']);
             }
             
-            $code = self::renderAttributes('<img',$parameters);
+            $code = self::renderAttributes('<img', $parameters);
             
             /**
              * Check if Doctype is XHTML
-            */
-            if(self::_documentType > self::HTML5){
+             */
+            if (self::$_documentType > self::HTML5) {
                 $code .= ' />';
-            }else{
+            } else {
                 $code .= '>';
             }
-		    
-		    return $code;
+            
+            return $code;
         }
 
         /**
@@ -1299,30 +1306,30 @@ namespace Phalcon
          */
         public static function friendlyTitle($text, $separator = '-', $lowercase = true, $replace = null)
         {
-            if(extension_loaded('iconv')){
+            if (extension_loaded('iconv')) {
                 /**
                  * Save the old locale and set the new locale to UTF-8
                  */
                 $locale = setlocale(LC_ALL, 'en_US.UTF-8');
-                $text = iconv('UTF-8', 'ASCII/TRANSLIT')；
+                $text = iconv('UTF-8', 'ASCII/TRANSLIT');
             }
             
-            if($replace){
-                if(!is_array($replace) || !is_string($replace)){
+            if ($replace) {
+                if (! is_array($replace) || ! is_string($replace)) {
                     throw new Exception("Parameter replace must be an array or a string");
                 }
-                $text = str_replace($replace, ' ',$text);
+                $text = str_replace($replace, ' ', $text);
             }
             
             $friendly = preg_replace('/[^a-zA-Z0-9\\/_|+-]/', '', $text);
-            if($lowercase){
+            if ($lowercase) {
                 $friendly = strtolower($friendly);
             }
             
-            if(extension_loaded('iconv')){
+            if (extension_loaded('iconv')) {
                 /**
                  * Revert back to the old locale
-                */
+                 */
                 setlocale(LC_ALL, $locale);
             }
             
@@ -1337,10 +1344,10 @@ namespace Phalcon
          */
         public static function setDocType($doctype)
         {
-            if($doctype < self::HTML32 || $doctype > self::XHTML5){
-                self::_documentType = self::HTML5;
-            }else{
-                self::_documentType = $doctype;
+            if ($doctype < self::HTML32 || $doctype > self::XHTML5) {
+                self::$_documentType = self::HTML5;
+            } else {
+                self::$_documentType = $doctype;
             }
         }
 
@@ -1351,39 +1358,42 @@ namespace Phalcon
          */
         public static function getDocType()
         {
-            switch(self::_documentType)
-            {
+            switch (self::$_documentType) {
                 case self::HTML32:
                     return '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">' . PHP_EOL;
-                    /* no break */
+                /* no break */
                 case self::HTML401_STRICT:
                     return '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"' . PHP_EOL . '\t"http://www.w3.org/TR/html4/strict.dtd">' . PHP_EOL;
-                    /* no break */
+                /* no break */
                 case self::HTML401_TRANSITIONAL:
                     return '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"' . PHP_EOL . '\t"http://www.w3.org/TR/html4/loose.dtd">' . PHP_EOL;
-                    /* no break */
+                /* no break */
                 case self::HTML401_FRAMESET:
                     return '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"' . PHP_EOL . '\t"http://www.w3.org/TR/html4/frameset.dtd">' . PHP_EOL;
-                    /* no break */
+                /* no break */
                 case self::XHTML10_STRICT:
                     return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"' . PHP_EOL . '\t"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">' . PHP_EOL;
-                    /* no break */
-                case self::XHTML10_TRANSITIONAL:  return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"' . PHP_EOL.'\t"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">' . PHP_EOL;
-			/* no break */
-
-			case self::XHTML10_FRAMESET:  return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"' . PHP_EOL . '\t"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">' . PHP_EOL;
-			/* no break */
-
-			case self::XHTML11:  return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"' . PHP_EOL . '\t"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">' . PHP_EOL;
-			/* no break */
-
-			case self::XHTML20: 
-			    return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 2.0//EN"' . PHP_EOL . '\t"http://www.w3.org/MarkUp/DTD/xhtml2.dtd">' . PHP_EOL;
-			/* no break */
-
-			case self::HTML5:
-			case self::XHTML5: return '<!DOCTYPE html>' . PHP_EOL;
-			/* no break */
+                /* no break */
+                case self::XHTML10_TRANSITIONAL:
+                    return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"' . PHP_EOL . '\t"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">' . PHP_EOL;
+                /* no break */
+                
+                case self::XHTML10_FRAMESET:
+                    return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"' . PHP_EOL . '\t"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">' . PHP_EOL;
+                /* no break */
+                
+                case self::XHTML11:
+                    return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"' . PHP_EOL . '\t"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">' . PHP_EOL;
+                /* no break */
+                
+                case self::XHTML20:
+                    return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 2.0//EN"' . PHP_EOL . '\t"http://www.w3.org/MarkUp/DTD/xhtml2.dtd">' . PHP_EOL;
+                /* no break */
+                
+                case self::HTML5:
+                case self::XHTML5:
+                    return '<!DOCTYPE html>' . PHP_EOL;
+                /* no break */
             }
             
             return '';
@@ -1410,30 +1420,32 @@ namespace Phalcon
          */
         public static function tagHtml($tagName, $parameters = null, $selfClose = false, $onlyStart = false, $useEol = false)
         {
-            if(!is_array($parameters)){
-                $parameters = array($parameters);
+            if (! is_array($parameters)) {
+                $parameters = array(
+                    $parameters
+                );
             }
             
-            $localCode = self::renderAttributes('<'.$tagName,$parameters);
+            $localCode = self::renderAttributes('<' . $tagName, $parameters);
             
             /**
              * Check if the Doctype is XHTML
-            */
-            if(self::_documentType > self::HTML5){
-                if($selfClose){
+             */
+            if (self::$_documentType > self::HTML5) {
+                if ($selfClose) {
                     $localCode .= ' />';
-                }else{
+                } else {
                     $localCode .= '>';
                 }
-            }else{
-                if($onlyStart){
+            } else {
+                if ($onlyStart) {
                     $localCode .= '>';
-                }else{
-                    $localCode .= '></'.$tagName.'>';
+                } else {
+                    $localCode .= '></' . $tagName . '>';
                 }
             }
             
-            if($useEol){
+            if ($useEol) {
                 $localCode .= PHP_EOL;
             }
             
@@ -1455,10 +1467,10 @@ namespace Phalcon
          */
         public static function tagHtmlClose($tagName, $useEol = false)
         {
-            if($useEol){
-                return '</'.$tagName.'>'.PHP_EOL;
+            if ($useEol) {
+                return '</' . $tagName . '>' . PHP_EOL;
             }
-            return '</'.$tagName.'>';
+            return '</' . $tagName . '>';
         }
     }
 }

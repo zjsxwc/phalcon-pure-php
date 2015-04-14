@@ -654,27 +654,20 @@ namespace Phalcon
         }
 
         /**
-         * handler Exception throw.
+         * Throws an internal exception
          *
          * @param string $message            
-         * @param number $type            
+         * @param int $exceptionCode            
          * @return boolean
          */
-        protected function _throwDispatchException($message, $type = 0)
-        {
-            throw new \Phalcon\Exception($message);
-            return false;
-        }
+        protected abstract function _throwDispatchException($message, $exceptionCode = null);
 
         /**
-         * handle throwed Exception
+         * Handles a user exception
          *
-         * @param \Exception $e            
+         * @param \Exception $exception            
          * @return boolean
          */
-        protected function _handleException(\Exception $e)
-        {
-            return true;
-        }
+        protected abstract function _handleException(\Exception $exception);
     }
 }

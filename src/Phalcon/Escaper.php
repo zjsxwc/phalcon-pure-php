@@ -81,16 +81,9 @@ namespace Phalcon
             /**
              * Check if charset is ASCII or ISO-8859-1
              */
-            $charset = is_basic_charset($str);
+            $charset = \Phalcon\Text::_is_basic_charset($str);
             if (is_string($charset)) {
                 return $charset;
-            }
-            
-            /**
-             * We require mbstring extension here
-             */
-            if (! function_exists('mb_detect_encoding')) {
-                return null;
             }
             
             /**
@@ -102,7 +95,13 @@ namespace Phalcon
                 'UTF-8',
                 'ISO-8859-1',
                 'ASCII'
-            ) as $charset) {}
+            ) as $charset) {
+                if (mb_detect_encoding($str, $charset, true)) {
+                    return $charset;
+                }
+            }
+            
+            return mb_detect_encoding($str);
         }
 
         /**
@@ -113,7 +112,13 @@ namespace Phalcon
          * @return string
          */
         public function normalizeEncoding($str)
-        {}
+        {
+            /**
+             * Convert to UTF-32 (4 byte characters, regardless of actual number of bytes in
+             * the character).
+             */
+            return mb_convert_encoding($str, 'UTF-32', $this->detectEncoding($str));
+        }
 
         /**
          * Escapes a HTML string.
@@ -124,7 +129,9 @@ namespace Phalcon
          * @return string
          */
         public function escapeHtml($text)
-        {}
+        {
+            return htmlspecialchars($text, $this->_htmlQuoteType, $this->_encoding);
+        }
 
         /**
          * Escapes a HTML attribute string
@@ -134,7 +141,9 @@ namespace Phalcon
          * @return string
          */
         public function escapeHtmlAttr($attribute)
-        {}
+        {
+            return htmlspecialchars($attribute, ENT_QUOTES, $this->_encoding);
+        }
 
         /**
          * Escape CSS strings by replacing non-alphanumeric chars by their hexadecimal escaped representation
@@ -144,7 +153,9 @@ namespace Phalcon
          * @return string
          */
         public function escapeCss($css)
-        {}
+        {
+            return \Phalcon\Text::_escape_css($this->normalizeEncoding($css));
+        }
 
         /**
          * Escape javascript strings by replacing non-alphanumeric chars by their hexadecimal escaped representation
@@ -154,7 +165,13 @@ namespace Phalcon
          * @return string
          */
         public function escapeJs($js)
-        {}
+        {
+            /**
+             * Normalize encoding to UTF-32
+             * Escape the string
+             */
+            return \Phalcon\Text::_escape_js($this->normalizeEncoding($js));
+        }
 
         /**
          * Escapes a URL.
@@ -165,6 +182,8 @@ namespace Phalcon
          * @return string
          */
         public function escapeUrl($url)
-        {}
+        {
+            return rawurlencode($url);
+        }
     }
 }

@@ -168,7 +168,7 @@ namespace Phalcon
          */
         public static function startsWith($str, $start, $ignoreCase = null)
         {
-            return starts_with($str, $start, $ignoreCase);
+            return \Phalcon\Text::_starts_with($str, $start, $ignoreCase);
         }
 
         /**
@@ -190,7 +190,7 @@ namespace Phalcon
          */
         public static function endsWith($str, $end, $ignoreCase = null)
         {
-            return ends_with($str, $end, $ignoreCase);
+            return \Phalcon\Text::_ends_with($str, $end, $ignoreCase);
         }
 
         /**
@@ -226,6 +226,162 @@ namespace Phalcon
                 return mb_strtoupper(str);
             }
             return strtoupper(str);
+        }
+        
+        /* == internal funciton area == */
+        /**
+         * Filter alphanum string
+         *
+         * @param string $param            
+         * @return string
+         */
+        public static function _filter_alphanum($param)
+        {
+            $param .= '';
+            $filtered_str = '';
+            $len = strlen($param);
+            for ($i = 0; $i < $len; ++ $i) {
+                $ch = ord($param[$i]);
+                if (($ch >= 97 && $ch <= 122) || ($ch >= 65 && $ch <= 90)) {
+                    $filtered_str .= chr($ch);
+                }
+            }
+            return $filtered_str;
+        }
+
+        public static function _starts_with($str, $start, $ignoreCase = null)
+        {
+            return ($ignoreCase ? strcasecmp($start, substr($str, 0, strlen($start))) : strcmp($start, substr($str, 0, strlen($start)))) == 0;
+        }
+
+        public static function _ends_with($str, $end, $ignoreCase = null)
+        {
+            return ($ignoreCase ? strcasecmp($end, substr($str, - strlen($end))) : strcmp($end, substr($str, - strlen($end)))) == 0;
+        }
+
+        /**
+         *
+         * @param string $param            
+         * @return string
+         */
+        public static function _is_basic_charset($param)
+        {
+            $len = strlen($param);
+            $iso88591 = false;
+            for ($i = 0; $i < $len; ++ $i) {
+                $ch = ord($param[$i]);
+                if ($ch == 172 || ($ch >= 128 && $ch <= 159)) {
+                    continue;
+                }
+                if ($ch >= 160 && $ch <= 255) {
+                    $iso88591 = true;
+                    continue;
+                }
+                return false;
+            }
+            if (! $iso88591) {
+                return 'ASCII';
+            }
+            return 'ISO-8859-1';
+        }
+
+        /**
+         *
+         * Escapes non-alphanumeric characters to \HH+space
+         *
+         * @param string $css            
+         * @return string
+         */
+        public static function _escape_css($css)
+        {
+            return \Phalcon\Text::_escape_multi($scc, '\\', ' ', 0);
+        }
+
+        /**
+         * Escapes non-alphanumeric characters to \xHH+\0
+         *
+         * @param string $js            
+         * @return string
+         */
+        public static function _escape_js($js)
+        {
+            return \Phalcon\Text::_escape_multi($js, '\\x', '\0', 1);
+        }
+
+        /**
+         * Perform escaping of non-alphanumeric characters to different formats
+         *
+         * @param string $param            
+         * @param string $escape_char            
+         * @param string $escape_extra            
+         * @param boolean $use_whitelist            
+         * @return string
+         */
+        public static function _escape_multi($param, $escape_char, $escape_extra, $use_whitelist)
+        {
+            $len = strlen($param);
+            if ($len <= 0) {
+                return '';
+            }
+            
+            $ret = '';
+            for ($i = 0; $i < $len; ++ $i) {
+                $char = $param[$i];
+                $ch = ord($char);
+                if ($ch == 0) {
+                    break;
+                }
+                if ($ch < 256 && (($ch >= 97 && $ch <= 122) || ($ch >= 65 && $ch <= 90))) {
+                    $ret .= $char;
+                    continue;
+                }
+                
+                if ($use_whitelist) {
+                    switch ($char) {
+                        case ' ':
+                        case '/':
+                        case '*':
+                        case '+':
+                        case '-':
+                        case '\t':
+                        case '\n':
+                        case '^':
+                        case '$':
+                        case '!':
+                        case '?':
+                        case '\\':
+                        case '#':
+                        case '}':
+                        case '{':
+                        case ')':
+                        case '(':
+                        case ']':
+                        case '[':
+                        case '.':
+                        case ',':
+                        case ':':
+                        case ';':
+                        case '_':
+                        case '|':
+                            $ret .= $char;
+                            continue;
+                    }
+                }
+                
+                /**
+                 * Convert character to hexadecimal
+                 */
+                $hex = bin2hex($char);
+                
+                /**
+                 * Append the escaped character
+                 */
+                $ret .= $escape_char . $hex;
+                if ($escape_extra != '\0') {
+                    $ret .= $escape_extra;
+                }
+            }
+            return $ret;
         }
     }
 }

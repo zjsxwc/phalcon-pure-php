@@ -49,7 +49,7 @@ namespace Phalcon
 
         protected $_actionName = null;
 
-        protected $_params = array();
+        protected $_params = null;
 
         protected $_returnedValue = null;
 
@@ -73,7 +73,9 @@ namespace Phalcon
          * \Phalcon\Dispatcher constructor
          */
         public function __construct()
-        {}
+        {
+            $this->_params = array();
+        }
 
         /**
          * Sets the dependency injector
